@@ -29,6 +29,12 @@ const Home = () => {
           <meta name="og:type" content="Website" />
           <meta name="og:description" content="Get Information about the anomalies brought about by Covid19 or Corona Virus" />
           <meta name="keywords" content="corona virus app, corona-app, corona virus stats, covid19 stats, covid19 stats app" />
+          <meta name="og:image" content="https://corona-app.now.sh/main.png" />
+          <meta name="og:image:alt" content="Get Information about the anomalies brought about by Covid19 or Corona Virus" />
+          <meta name="twitter:title" content="Corona App" />
+          <meta name="twitter:description" content="Get Information about the anomalies brought about by Covid19 or Corona Virus" />
+          <meta name="twitter:image" content="https://corona-app.now.sh/main.png" />
+          <meta name="twitter:image:alt" content="Get Information about the anomalies brought about by Covid19 or Corona Virus" />
         </Head>
         <main>
           <h1 className="title">
