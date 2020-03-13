@@ -1,11 +1,22 @@
 import Head from 'next/head'
+import { useEffect } from 'react'
 
 import { GlobalProvider } from '../context/GlobalState'
 import MainCards from '../components/mainCards'
 import CountrySelectBox from '../components/countrySelectBox'
 import SelectedCountry from '../components/selectedCountry'
+import { initGA, logPageView } from '../utils/analytics'
 
 const Home = () => {
+  useEffect(() => {
+    if(!window.GA_INITIALIZED) {
+      initGA()
+      window.GA_INITIALIZED = true
+    }
+
+    logPageView()
+  }, [])
+
   return (
     <GlobalProvider>
       <div className="container">
