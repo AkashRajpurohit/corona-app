@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
+import Card from '../components/card'
 
 const Home = () => {
 
@@ -42,18 +43,26 @@ const Home = () => {
         </p>
   
         <div className="grid">
-          <a href="https://nextjs.org/docs" className="card confirmed">
-            <h3>Confirmed &rarr;</h3>
-            <p>{stats?.confirmed?.value}</p>
-          </a>
-          <a href="https://nextjs.org/docs" className="card deaths">
-            <h3>Deaths &rarr;</h3>
-            <p>{stats?.deaths?.value}</p>
-          </a>
-          <a href="https://nextjs.org/docs" className="card recovered">
-            <h3>Recovered &rarr;</h3>
-            <p>{stats?.recovered?.value}</p>
-          </a>
+          <Card 
+            link="/" 
+            title="Confirmed" 
+            value={stats?.confirmed?.value} 
+            type="confirmed" 
+          />
+
+          <Card 
+            link="/" 
+            title="Deaths" 
+            value={stats?.deaths?.value} 
+            type="deaths" 
+          />
+
+          <Card 
+            link="/" 
+            title="Recovered" 
+            value={stats?.recovered?.value} 
+            type="recovered" 
+          />
         </div>
       </main>
   
@@ -154,51 +163,6 @@ const Home = () => {
   
           width: 900px;
           margin-top: 3rem;
-        }
-  
-        .card {
-          margin: 1rem;
-          flex-basis: 20%;
-          min-width: 200px;
-          padding: 1.5rem;
-          text-align: left;
-          color: inherit;
-          text-decoration: none;
-          border: 1px solid #eaeaea;
-          border-radius: 10px;
-          transition: color 0.15s ease, border-color 0.15s ease;
-        }
-  
-        .card.confirmed:hover,
-        .card.confirmed:focus,
-        .card.confirmed:active {
-          color: #ff9800;
-          border-color: #ff9800;
-        }
-
-        .card.deaths:hover,
-        .card.deaths:focus,
-        .card.deaths:active {
-          color: #ef5350;
-          border-color: #ef5350;
-        }
-
-        .card.recovered:hover,
-        .card.recovered:focus,
-        .card.recovered:active {
-          color: #1de9b6;
-          border-color: #1de9b6;
-        }
-  
-        .card h3 {
-          margin: 0 0 1rem 0;
-          font-size: 1.5rem;
-        }
-  
-        .card p {
-          margin: 0;
-          font-size: 1.25rem;
-          line-height: 1.5;
         }
   
         @media (max-width: 600px) {
