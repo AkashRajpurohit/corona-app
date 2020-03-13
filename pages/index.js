@@ -11,7 +11,7 @@ const Home = () => {
       console.log("Fetching data")
       const resp = await fetch('https://covid19.mathdro.id/api')
       const data = await resp.json()
-
+      console.log(data)
       setStats(data)
       setIsLoading(false)
     }
@@ -22,7 +22,7 @@ const Home = () => {
   return (
     <div className="container">
       <Head>
-        <title>Create Next App</title>
+        <title>Corona App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {
@@ -34,40 +34,25 @@ const Home = () => {
       }
       <main>
         <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Welcome to <a href="/">Corona App</a>
         </h1>
   
         <p className="description">
-          Get started by editing <code>pages/index.js</code>
+          This app displays the impact created because of the <code>Covid19 or Corona Virus</code>
         </p>
   
         <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
+          <a href="https://nextjs.org/docs" className="card confirmed">
+            <h3>Confirmed &rarr;</h3>
+            <p>{stats?.confirmed?.value}</p>
           </a>
-  
-          <a href="https://nextjs.org/learn" className="card">
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
+          <a href="https://nextjs.org/docs" className="card deaths">
+            <h3>Deaths &rarr;</h3>
+            <p>{stats?.deaths?.value}</p>
           </a>
-  
-          <a
-            href="https://github.com/zeit/next.js/tree/master/examples"
-            className="card"
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-  
-          <a
-            href="https://zeit.co/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with ZEIT Now.
-            </p>
+          <a href="https://nextjs.org/docs" className="card recovered">
+            <h3>Recovered &rarr;</h3>
+            <p>{stats?.recovered?.value}</p>
           </a>
         </div>
       </main>
@@ -167,13 +152,14 @@ const Home = () => {
           justify-content: center;
           flex-wrap: wrap;
   
-          max-width: 800px;
+          width: 900px;
           margin-top: 3rem;
         }
   
         .card {
           margin: 1rem;
-          flex-basis: 45%;
+          flex-basis: 20%;
+          min-width: 200px;
           padding: 1.5rem;
           text-align: left;
           color: inherit;
@@ -183,11 +169,25 @@ const Home = () => {
           transition: color 0.15s ease, border-color 0.15s ease;
         }
   
-        .card:hover,
-        .card:focus,
-        .card:active {
-          color: #0070f3;
-          border-color: #0070f3;
+        .card.confirmed:hover,
+        .card.confirmed:focus,
+        .card.confirmed:active {
+          color: #ff9800;
+          border-color: #ff9800;
+        }
+
+        .card.deaths:hover,
+        .card.deaths:focus,
+        .card.deaths:active {
+          color: #ef5350;
+          border-color: #ef5350;
+        }
+
+        .card.recovered:hover,
+        .card.recovered:focus,
+        .card.recovered:active {
+          color: #1de9b6;
+          border-color: #1de9b6;
         }
   
         .card h3 {
