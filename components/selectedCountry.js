@@ -1,14 +1,19 @@
 import { useContext } from "react"
 import { GlobalContext } from "../context/GlobalState"
+import Skeleton from './skeleton'
 
 const SelectedCountry = () => {
-  const { selectedCountry, displayText } = useContext(GlobalContext)
+  const { selectedCountry, displayText, loading } = useContext(GlobalContext)
 
   return (
     <>
-      <p>{displayText} <code>{selectedCountry}</code></p>
+      <div className="container">
+      {
+        loading ? <Skeleton width="300" height="25" /> : <p>{displayText} <code>{selectedCountry}</code></p>
+      }
+      </div>
       <style jsx>{`
-        p {
+        .container {
           line-height: 1.5;
           font-size: 1.5rem;
         }

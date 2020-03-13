@@ -1,8 +1,9 @@
 import { useContext } from 'react'
 import { GlobalContext } from "../context/GlobalState"
+import Skeleton from './skeleton'
 
 const CountrySelectBox = () => {
-  const { countries, changeCountry } = useContext(GlobalContext)
+  const { countries, changeCountry, loading, selectedCountryCode } = useContext(GlobalContext)
 
   const handleSelectBoxChange = (e) => {
     let index = e.nativeEvent.target.selectedIndex;
@@ -13,20 +14,24 @@ const CountrySelectBox = () => {
 
   return (
     <>
-      <label className="wrapper">Choose a place
-      <div className="button custom-select">
-          <select onChange={(e) => handleSelectBoxChange(e)}>
-            <option value="Entire World">Entire World</option>
-            {
-              Object.entries(countries).length > 0 && Object.entries(countries.countries).map(([country, code]) => (
-                <option key={code} value={countries.iso3[code]}>
-                  {country}
-                </option>
-              ))
-            }
-          </select>
-        </div>
-      </label>
+      {
+        loading ? <Skeleton width="400" /> : (
+          <label className="wrapper">Choose a place
+            <div className="button custom-select">
+              <select value={selectedCountryCode} onChange={(e) => handleSelectBoxChange(e)}>
+                <option value="Entire World">Entire World</option>
+                {
+                  Object.entries(countries).length > 0 && Object.entries(countries.countries).map(([country, code]) => (
+                    <option key={code} value={countries.iso3[code]}>
+                      {country}
+                    </option>
+                  ))
+                }
+              </select>
+            </div>
+          </label>
+        )
+      }
       <style jsx>{`
         label {
           display:block;

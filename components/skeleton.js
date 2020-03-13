@@ -1,12 +1,12 @@
-const Skeleton = ({ width }) => {
+const Skeleton = ({ width = 80, height = 50 }) => {
   return (
     <>
-      <div className="loading"></div>
+      <p className="loading"></p>
       <style jsx>{`
         .loading {
-          margin: auto;
+          display: inline-block;
           width: ${width}px;
-          height: 20px;
+          height: ${height}px;
           animation: shine 1s infinite;
         }
       

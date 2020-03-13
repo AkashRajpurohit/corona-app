@@ -1,10 +1,16 @@
-const Card = ({ type, title, value, link }) => {
+import { useContext } from 'react'
+import { GlobalContext } from "../context/GlobalState"
+import Skeleton from './skeleton'
 
+const Card = ({ type, title, value, link }) => {
+  const { loading } = useContext(GlobalContext)
   return (
     <>
       <a href={link} className={`card ${type}`}>
         <h3>{title} &rarr;</h3>
-        <p>{value}</p>
+        <div>{
+          loading ? <Skeleton width="80" height="20" /> : value
+        }</div>
       </a>
 
       <style jsx>{`
@@ -62,7 +68,7 @@ const Card = ({ type, title, value, link }) => {
           font-size: 1.5rem;
         }
   
-        .card p {
+        .card div {
           margin: 0;
           font-size: 1.25rem;
           line-height: 1.5;

@@ -1,6 +1,14 @@
 import React, { createContext, useReducer, useEffect } from 'react'
 import AppReducer from './AppReducer'
-import { ADD_DEATH, ADD_CONFIRMED, ADD_RECOVERED, ADD_COUNTRIES, SELECT_COUNTRY, UPDATE_DISPLAY_TEXT } from './constants'
+import { 
+  ADD_DEATH, 
+  ADD_RECOVERED,
+  ADD_CONFIRMED,
+  ADD_COUNTRIES, 
+  SELECT_COUNTRY, 
+  UPDATE_DISPLAY_TEXT, 
+  SET_IS_LOADING 
+} from "./constants"
 
 const initialState = {
   countries: {},
@@ -9,7 +17,8 @@ const initialState = {
   displayText: 'You are currently looking data for ',
   confirmed: 0,
   death: 0,
-  recovered: 0
+  recovered: 0,
+  loading: true
 }
 
 // Create Context
@@ -70,6 +79,7 @@ export const GlobalProvider = ({ children }) => {
   const refreshData = async (code) => {
     try {
       let resp;
+      setIsLoading(true)
 
       if(code === "Entire World") {
         resp = await fetch(`https://covid19.mathdro.id/api/`)
@@ -83,17 +93,28 @@ export const GlobalProvider = ({ children }) => {
       addDeath(deaths.value)
       addRecovered(recovered.value)
       updateDisplayText('You are currently looking data for ')
+      setIsLoading(false)
     } catch(e) {
       updateDisplayText('Cannot find data for ')
       addConfirmed(0)
       addDeath(0)
       addRecovered(0)
+      setIsLoading(false)
     }
+  }
+
+  const setIsLoading = (value) => {
+    dispatch({
+      type: SET_IS_LOADING,
+      payload: value
+    })
   }
 
   useEffect(() => {
     async function fetchData() {
       try {
+        setIsLoading(true)
+
         const pGeneralInfo = fetch('https://covid19.mathdro.id/api')
         const pCountryInfo = fetch('https://covid19.mathdro.id/api/countries')
 
@@ -107,8 +128,9 @@ export const GlobalProvider = ({ children }) => {
         addDeath(deaths.value)
         addCountries(countries)
 
+        setIsLoading(false)
       } catch(e) {
-        console.log(e)
+        setIsLoading(false)
       }
     }
 
@@ -124,6 +146,7 @@ export const GlobalProvider = ({ children }) => {
       selectedCountry: state.selectedCountry,
       selectedCountryCode: state.selectedCountryCode,
       displayText: state.displayText,
+      loading: state.loading,
       changeCountry
     }}>
       {children}
