@@ -2,11 +2,11 @@ import { useContext } from "react"
 import { GlobalContext } from "../context/GlobalState"
 
 const SelectedCountry = () => {
-  const { selectedCountry } = useContext(GlobalContext)
+  const { selectedCountry, displayText } = useContext(GlobalContext)
 
   return (
     <>
-      <p>You are currently looking data for <code>{selectedCountry}</code></p>
+      <p>{displayText} <code>{selectedCountry}</code></p>
       <style jsx>{`
         code {
           background: #fafafa;

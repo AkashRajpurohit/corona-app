@@ -1,11 +1,12 @@
 import React, { createContext, useReducer, useEffect } from 'react'
 import AppReducer from './AppReducer'
-import { ADD_DEATH, ADD_CONFIRMED, ADD_RECOVERED, ADD_COUNTRIES, SELECT_COUNTRY } from './constants'
+import { ADD_DEATH, ADD_CONFIRMED, ADD_RECOVERED, ADD_COUNTRIES, SELECT_COUNTRY, UPDATE_DISPLAY_TEXT } from './constants'
 
 const initialState = {
   countries: {},
   selectedCountry: 'Entire World',
   selectedCountryCode: '',
+  displayText: 'You are currently looking data for ',
   confirmed: 0,
   death: 0,
   recovered: 0
@@ -55,6 +56,39 @@ export const GlobalProvider = ({ children }) => {
         selectedCountryCode: code
       }
     })
+
+    refreshData(code)
+  }
+
+  const updateDisplayText = (text) => {
+    dispatch({
+      type: UPDATE_DISPLAY_TEXT,
+      payload: text
+    })
+  }
+
+  const refreshData = async (code) => {
+    try {
+      let resp;
+
+      if(code === "Entire World") {
+        resp = await fetch(`https://covid19.mathdro.id/api/`)
+      } else {
+        resp = await fetch(`https://covid19.mathdro.id/api/countries/${code}`)
+      }
+
+      const { confirmed, deaths, recovered } = await resp.json()
+
+      addConfirmed(confirmed.value)
+      addDeath(deaths.value)
+      addRecovered(recovered.value)
+      updateDisplayText('You are currently looking data for ')
+    } catch(e) {
+      updateDisplayText('Cannot find data for ')
+      addConfirmed(0)
+      addDeath(0)
+      addRecovered(0)
+    }
   }
 
   useEffect(() => {
@@ -89,6 +123,7 @@ export const GlobalProvider = ({ children }) => {
       confirmed: state.confirmed,
       selectedCountry: state.selectedCountry,
       selectedCountryCode: state.selectedCountryCode,
+      displayText: state.displayText,
       changeCountry
     }}>
       {children}
