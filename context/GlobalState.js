@@ -1,5 +1,6 @@
 import React, { createContext, useReducer, useEffect } from 'react'
 import AppReducer from './AppReducer'
+import { logEvent, logException } from '../utils/analytics'
 import { 
   ADD_DEATH, 
   ADD_RECOVERED,
@@ -94,12 +95,16 @@ export const GlobalProvider = ({ children }) => {
       addRecovered(recovered.value)
       updateDisplayText('You are currently looking data for ')
       setIsLoading(false)
+
+      logEvent('data', 'change')
     } catch(e) {
       updateDisplayText('Cannot find data for ')
       addConfirmed(0)
       addDeath(0)
       addRecovered(0)
       setIsLoading(false)
+      
+      logException(`Cannot load data for ${state.selectedCountry}`)
     }
   }
 
@@ -129,8 +134,11 @@ export const GlobalProvider = ({ children }) => {
         addCountries(countries)
 
         setIsLoading(false)
+
+        logEvent('data', 'load')
       } catch(e) {
         setIsLoading(false)
+        logException('Cannot load initial data', true)
       }
     }
 
