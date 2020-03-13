@@ -1,82 +1,41 @@
 import Head from 'next/head'
-import { useState, useEffect } from 'react'
-import Card from '../components/card'
+
+import { GlobalProvider } from '../context/GlobalState'
+import MainCards from '../components/mainCards'
 
 const Home = () => {
-
-  const [stats, setStats] = useState({})
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    async function fetchData() {
-      console.log("Fetching data")
-      const resp = await fetch('https://covid19.mathdro.id/api')
-      const data = await resp.json()
-      console.log(data)
-      setStats(data)
-      setIsLoading(false)
-    }
-
-    fetchData()
-  }, [])
-
   return (
-    <div className="container">
-      <Head>
-        <title>Corona App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      {
-        isLoading ? <p>Is loading data</p> : (
-          <div>
-            {JSON.stringify(stats, null, 2)}
+    <GlobalProvider>
+      <div className="container">
+        <Head>
+          <title>Corona App</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <main>
+          <h1 className="title">
+            Welcome to <a href="/">Corona App</a>
+          </h1>
+
+          <p className="description">
+            This app displays the impact created because of the <code>Covid19 or Corona Virus</code>
+          </p>
+
+          <div className="grid">
+            <MainCards />
           </div>
-        )
-      }
-      <main>
-        <h1 className="title">
-          Welcome to <a href="/">Corona App</a>
-        </h1>
-  
-        <p className="description">
-          This app displays the impact created because of the <code>Covid19 or Corona Virus</code>
-        </p>
-  
-        <div className="grid">
-          <Card 
-            link="/" 
-            title="Confirmed" 
-            value={stats?.confirmed?.value} 
-            type="confirmed" 
-          />
+        </main>
 
-          <Card 
-            link="/" 
-            title="Deaths" 
-            value={stats?.deaths?.value} 
-            type="deaths" 
-          />
+        <footer>
+          <a
+            href="https://zeit.co?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Powered by <img src="/zeit.svg" alt="ZEIT Logo" />
+          </a>
+        </footer>
 
-          <Card 
-            link="/" 
-            title="Recovered" 
-            value={stats?.recovered?.value} 
-            type="recovered" 
-          />
-        </div>
-      </main>
-  
-      <footer>
-        <a
-          href="https://zeit.co?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by <img src="/zeit.svg" alt="ZEIT Logo" />
-        </a>
-      </footer>
-  
-      <style jsx>{`
+        <style jsx>{`
         .container {
           min-height: 100vh;
           padding: 0 0.5rem;
@@ -172,8 +131,8 @@ const Home = () => {
           }
         }
       `}</style>
-  
-      <style jsx global>{`
+
+        <style jsx global>{`
         html,
         body {
           padding: 0;
@@ -186,7 +145,8 @@ const Home = () => {
           box-sizing: border-box;
         }
       `}</style>
-    </div>
+      </div>
+    </GlobalProvider>
   )
 }
 

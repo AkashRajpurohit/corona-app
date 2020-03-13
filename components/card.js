@@ -1,4 +1,5 @@
 const Card = ({ type, title, value, link }) => {
+
   return (
     <>
       <a href={link} className={`card ${type}`}>
@@ -27,9 +28,9 @@ const Card = ({ type, title, value, link }) => {
           border-color: #ff9800;
         }
 
-        .card.deaths:hover,
-        .card.deaths:focus,
-        .card.deaths:active {
+        .card.death:hover,
+        .card.death:focus,
+        .card.death:active {
           color: #ef5350;
           border-color: #ef5350;
         }
