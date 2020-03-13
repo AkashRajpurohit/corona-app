@@ -12,6 +12,12 @@ const Home = () => {
         <Head>
           <title>Corona App</title>
           <link rel="icon" href="/favicon.ico" />
+          <meta name="author" content="Akash Rajpurohit" />
+          <meta name="description" content="Get Information about the anomalies brought about by Covid19 or Corona Virus" />
+          <meta name="og:title" content="Corona App" />
+          <meta name="og:type" content="Website" />
+          <meta name="og:description" content="Get Information about the anomalies brought about by Covid19 or Corona Virus" />
+          <meta name="keywords" content="corona virus app, corona-app, corona virus stats, covid19 stats, covid19 stats app" />
         </Head>
         <main>
           <h1 className="title">
@@ -19,7 +25,7 @@ const Home = () => {
           </h1>
 
           <p className="description">
-            This app displays the impact created because of the <code>Covid19 or Corona Virus</code>
+          Get Information about the anomalies brought about by <code>Covid19 or Corona Virus</code>
           </p>
 
           <CountrySelectBox />
