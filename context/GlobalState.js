@@ -1,6 +1,6 @@
 import React, { createContext, useReducer, useEffect } from 'react'
 import AppReducer from './AppReducer'
-import { ADD_DEATH, ADD_CONFIRMED, ADD_RECOVERED } from './constants'
+import { ADD_DEATH, ADD_CONFIRMED, ADD_RECOVERED, ADD_COUNTRIES } from './constants'
 
 const initialState = {
   countries: {},
@@ -39,15 +39,32 @@ export const GlobalProvider = ({ children }) => {
     })
   }
 
+  const addCountries = (countries) => {
+    dispatch({
+      type: ADD_COUNTRIES,
+      payload: countries
+    })
+  }
+
   useEffect(() => {
     async function fetchData() {
-      const resp = await fetch('https://covid19.mathdro.id/api')
-      const data = await resp.json()
-      const { deaths, recovered, confirmed } = data
+      try {
+        const pGeneralInfo = fetch('https://covid19.mathdro.id/api')
+        const pCountryInfo = fetch('https://covid19.mathdro.id/api/countries')
 
-      addConfirmed(confirmed.value)
-      addRecovered(recovered.value)
-      addDeath(deaths.value)
+        const [generalInfo, countryInfo] = await Promise.all([pGeneralInfo, pCountryInfo])
+
+        const { confirmed, deaths, recovered } = await generalInfo.json()
+        const countries = await countryInfo.json()
+
+        addConfirmed(confirmed.value)
+        addRecovered(recovered.value)
+        addDeath(deaths.value)
+        addCountries(countries)
+
+      } catch(e) {
+        console.log(e)
+      }
     }
 
     fetchData()

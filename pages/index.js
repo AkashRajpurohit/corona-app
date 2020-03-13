@@ -2,6 +2,7 @@ import Head from 'next/head'
 
 import { GlobalProvider } from '../context/GlobalState'
 import MainCards from '../components/mainCards'
+import CountrySelectBox from '../components/countrySelectBox'
 
 const Home = () => {
   return (
@@ -20,6 +21,8 @@ const Home = () => {
             This app displays the impact created because of the <code>Covid19 or Corona Virus</code>
           </p>
 
+          <CountrySelectBox />
+          
           <div className="grid">
             <MainCards />
           </div>
