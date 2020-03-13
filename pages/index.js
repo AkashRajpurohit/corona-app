@@ -32,13 +32,35 @@ const Home = () => {
         </main>
 
         <footer>
-          <a
-            href="https://zeit.co?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Powered by <img src="/zeit.svg" alt="ZEIT Logo" />
-          </a>
+          <div>
+            Powered by&nbsp;&nbsp;
+            <a
+              href="https://nextjs.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <b>Next.js</b>
+            </a>
+            &nbsp;&nbsp;&&nbsp;&nbsp;
+            <a
+              href="https://zeit.co"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <b>Zeit Now</b>
+            </a>
+          </div>
+
+          <div>
+            Made By&nbsp;&nbsp;
+            <a
+              href="https://akashwho.codes"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <b>Akash Rajpurohit</b>
+            </a>
+          </div>
         </footer>
 
         <style jsx>{`
@@ -65,20 +87,10 @@ const Home = () => {
           height: 100px;
           border-top: 1px solid #eaeaea;
           display: flex;
-          justify-content: center;
+          justify-content: space-between;
           align-items: center;
         }
-  
-        footer img {
-          margin-left: 0.5rem;
-        }
-  
-        footer a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-  
+        
         a {
           color: inherit;
           text-decoration: none;
@@ -157,3 +169,15 @@ const Home = () => {
 }
 
 export default Home
+
+// footer img {
+//   margin-left: 0.5rem;
+//   width: 10%;
+//   height: 20px;
+// }
+
+// footer a {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
