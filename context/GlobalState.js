@@ -1,10 +1,11 @@
 import React, { createContext, useReducer, useEffect } from 'react'
 import AppReducer from './AppReducer'
-import { ADD_DEATH, ADD_CONFIRMED, ADD_RECOVERED, ADD_COUNTRIES } from './constants'
+import { ADD_DEATH, ADD_CONFIRMED, ADD_RECOVERED, ADD_COUNTRIES, SELECT_COUNTRY } from './constants'
 
 const initialState = {
   countries: {},
-  selectedCountry: 'USA',
+  selectedCountry: 'Entire World',
+  selectedCountryCode: '',
   confirmed: 0,
   death: 0,
   recovered: 0
@@ -46,6 +47,16 @@ export const GlobalProvider = ({ children }) => {
     })
   }
 
+  const changeCountry = (country, code) => {
+    dispatch({
+      type: SELECT_COUNTRY,
+      payload: {
+        selectedCountry: country,
+        selectedCountryCode: code
+      }
+    })
+  }
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -75,7 +86,10 @@ export const GlobalProvider = ({ children }) => {
       countries: state.countries,
       death: state.death,
       recovered: state.recovered,
-      confirmed: state.confirmed
+      confirmed: state.confirmed,
+      selectedCountry: state.selectedCountry,
+      selectedCountryCode: state.selectedCountryCode,
+      changeCountry
     }}>
       {children}
     </GlobalContext.Provider>

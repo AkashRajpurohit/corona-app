@@ -1,4 +1,4 @@
-import { ADD_DEATH, ADD_RECOVERED, ADD_CONFIRMED, ADD_COUNTRIES } from "./constants"
+import { ADD_DEATH, ADD_RECOVERED, ADD_CONFIRMED, ADD_COUNTRIES, SELECT_COUNTRY } from "./constants"
 
 export default (state, action) => {
   switch (action.type) {
@@ -22,6 +22,12 @@ export default (state, action) => {
         ...state,
         countries: action.payload
       }
+    case SELECT_COUNTRY: {
+      return {
+        ...state,
+        ...action.payload
+      }
+    }
     default:
       return state
   }
