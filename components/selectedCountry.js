@@ -8,6 +8,10 @@ const SelectedCountry = () => {
     <>
       <p>{displayText} <code>{selectedCountry}</code></p>
       <style jsx>{`
+        p {
+          line-height: 1.5;
+          font-size: 1.5rem;
+        }
         code {
           background: #fafafa;
           border-radius: 5px;
