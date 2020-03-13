@@ -20,26 +20,41 @@ const Card = ({ type, title, value, link }) => {
           border-radius: 10px;
           transition: color 0.15s ease, border-color 0.15s ease;
         }
+
+        .card.confirmed {
+          color: #ff9800;
+          border-color: #ff9800;
+        }
+
+        .card.death {
+          color: #ef5350;
+          border-color: #ef5350;
+        }
+
+        .card.recovered {
+          color: #1de9b6;
+          border-color: #1de9b6;
+        }
   
         .card.confirmed:hover,
         .card.confirmed:focus,
         .card.confirmed:active {
-          color: #ff9800;
-          border-color: #ff9800;
+          color: #ff6d00;
+          border-color: #ff6d00;
         }
 
         .card.death:hover,
         .card.death:focus,
         .card.death:active {
-          color: #ef5350;
-          border-color: #ef5350;
+          color: #b71c1c;
+          border-color: #b71c1c;
         }
 
         .card.recovered:hover,
         .card.recovered:focus,
         .card.recovered:active {
-          color: #1de9b6;
-          border-color: #1de9b6;
+          color: #00bfa5;
+          border-color: #00bfa5;
         }
   
         .card h3 {
