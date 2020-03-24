@@ -7,21 +7,18 @@ const MainCards = () => {
     return (
         <>
             <Card
-              link="/"
               title="Confirmed"
               value={confirmed}
               type="confirmed"
             />
 
             <Card
-              link="/"
               title="Deaths"
               value={death}
               type="death"
             />
 
             <Card
-              link="/"
               title="Recovered"
               value={recovered}
               type="recovered"

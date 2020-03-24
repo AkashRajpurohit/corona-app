@@ -6,7 +6,7 @@ const Card = ({ type, title, value, link }) => {
   const { loading } = useContext(GlobalContext)
   return (
     <>
-      <a href={link} className={`card ${type}`}>
+      <a className={`card ${type}`}>
         <h3>{title} &rarr;</h3>
         <div>{
           loading ? <Skeleton width="80" height="20" /> : value
