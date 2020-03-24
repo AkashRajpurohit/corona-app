@@ -21,9 +21,9 @@ const CountrySelectBox = () => {
               <select value={selectedCountryCode} onChange={(e) => handleSelectBoxChange(e)}>
                 <option value="Entire World">Entire World</option>
                 {
-                  Object.entries(countries).length > 0 && Object.entries(countries.countries).map(([country, code]) => (
-                    <option key={code} value={countries.iso3[code]}>
-                      {country}
+                  countries.countries.length > 0 && countries.countries.map(({ name, iso3}) => (
+                    <option key={iso3} value={iso3}>
+                      {name}
                     </option>
                   ))
                 }
