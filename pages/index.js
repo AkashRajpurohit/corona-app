@@ -97,7 +97,7 @@ const Home = () => {
         }
   
         main {
-          padding: 5rem 0;
+          padding: 0;
           flex: 1;
           display: flex;
           flex-direction: column;
